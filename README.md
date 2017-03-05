@@ -122,6 +122,40 @@ These api makes standard api to fluent sytnax
 
 These API is port of [neuecc/ChainingAssertion](https://github.com/neuecc/ChainingAssertion)
 
+with UniRx
+---
+[UniRx](http://github.com/neuecc/UniRx/) helps Unit test easily. event as `IObservable<T>`,  `ObserveOnEveryValueChanged`, `ObservableTriggers` can watch test target's state from outer environment.
+
+```csharp
+public IEnumerator WithUniRxTestA()
+{
+    // subscribe event callback
+    var subscription = obj.SomeEventAsObservable().First().ToYieldInstruction();
+
+    // raise event 
+    obj.RaiseEventSomething();
+
+    // check event raise complete
+    yield return subscription;
+
+    subscription.Result.Is();
+}
+
+public IEnumerator UniRxTestB()
+{
+    // monitor value changed
+    var subscription = obj.ObserveEveryValueChanged(x => x.someValue).Skip(1).First().ToYieldInstruction();
+
+    // do something
+    obj.DoSomething();
+
+    // wait complete
+    yield return subscription;
+
+    subscription.Result.Is();
+}
+```
+
 Author Info
 ---
 Yoshifumi Kawai(a.k.a. neuecc) is a software developer in Japan.  
