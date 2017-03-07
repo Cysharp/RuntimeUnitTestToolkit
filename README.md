@@ -1,6 +1,6 @@
 RuntimeUnitTestToolkit
 ===
-Unity unit test framework forcused on run play time and actual machine
+Unity unit test framework focused on run play time and actual machine
 
 ![image](https://cloud.githubusercontent.com/assets/46207/23584717/4590d63e-01ad-11e7-8fe2-1dfcd83d06db.png)
 
