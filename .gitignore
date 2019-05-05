@@ -113,3 +113,6 @@ RuntimeUnitTestToolkit/bin/*
 RuntimeUnitTestToolkit/Library/*
 RuntimeUnitTestToolkit/obj/*
 RuntimeUnitTestToolkit/Temp/*
+RuntimeUnitTestToolkit/.vs/
+RuntimeUnitTestToolkit/UpgradeLog.htm
+RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.unitypackage

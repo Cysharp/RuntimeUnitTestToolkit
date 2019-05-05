@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F600090F-84ED-4371-4A5C-8C7E3CA30E28}</ProjectGuid>
+    <ProjectGuid>{A2333F75-E5E7-FB59-A132-CBDB357A5324}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>RuntimeUnitTestToolkit</AssemblyName>
+    <AssemblyName>RuntimeUnitTestToolkit.Editor</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -49,7 +49,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.1.0f2</UnityVersion>
   </PropertyGroup>
@@ -62,10 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\HierarchyTreeBuilder.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\UnitTestBuilder.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\UnitTestBuilder.MenuItems.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\UnitTestRunner.cs" />
+    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\Builder.cs" />
+    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\UnitTestLoader.cs" />
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>

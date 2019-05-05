@@ -1,40 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-// using RuntimeUnitTestToolkit;
-using RuntimeUnitTestToolkit;
+using NUnit.Framework;
+using UnityEngine.TestTools;
 
 namespace SampleUnitTest
 {
-    // make unit test on plain C# class
     public class SampleGroup
     {
-        // all public methods are automatically registered in test group
+        [Test]
         public void SumTest()
         {
             var x = int.Parse("100");
             var y = int.Parse("200");
 
-            // using RuntimeUnitTestToolkit;
-            // 'Is' is Assertion method, same as Assert(actual, expected)
-            (x + y).Is(300);
+            Assert.AreEqual(300, x + y);
         }
 
-        // return type 'IEnumerator' is marked as async test method
+        [UnityTest]
         public IEnumerator AsyncTest()
         {
             var testObject = new GameObject("Test");
 
-            // wait asynchronous coroutine(If import UniRx, you can use MainThreadDispatcher.StartCoroutine)
             var e = MoveToRight(testObject);
             while (e.MoveNext())
             {
                 yield return null;
             }
 
-            // assrtion
-            testObject.transform.position.x.Is(60);
-
+            Assert.AreEqual(60, testObject.transform.position.x);
             GameObject.Destroy(testObject);
         }
 

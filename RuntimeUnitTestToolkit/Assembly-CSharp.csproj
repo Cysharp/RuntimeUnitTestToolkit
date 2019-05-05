@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F600090F-84ED-4371-4A5C-8C7E3CA30E28}</ProjectGuid>
+    <ProjectGuid>{E55038AB-0D9F-58A8-AA57-50FF797854E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>RuntimeUnitTestToolkit</AssemblyName>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -62,10 +62,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\HierarchyTreeBuilder.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\UnitTestBuilder.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\Editor\UnitTestBuilder.MenuItems.cs" />
-    <Compile Include="Assets\RuntimeUnitTestToolkit\UnitTestRunner.cs" />
+    <Compile Include="Assets\Scripts\SampleGroup.cs" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.CollabProxy.Editor">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
     </Reference>
@@ -243,32 +261,11 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.TestRunner">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.TestRunner">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.VR">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Graphs">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
-      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Advertisements">
-      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
@@ -278,9 +275,6 @@
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>C:/Users/neuecc/Documents/Git/RuntimeUnitTestToolkit/RuntimeUnitTestToolkit/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0f2/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
