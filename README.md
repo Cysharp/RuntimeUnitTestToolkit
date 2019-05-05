@@ -32,7 +32,7 @@ CommandLine Reference
 ---
 For example, this library's CI itself.
 
-```
+```yml
 # build headless, mono, Linux player
 - run:
     name: Build Linux(Mono)
@@ -42,7 +42,7 @@ For example, this library's CI itself.
 - run: RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 ```
 
-All of the commnadline arguments. You can pass by `/` prefix.
+All of the commnadline arguments.
 
 | Command        | Desc |
 | ---            | ---  |
@@ -50,6 +50,8 @@ All of the commnadline arguments. You can pass by `/` prefix.
 | **/scriptBackend** ScriptingImplementation | Enum string(`Mono2x` or `IL2CPP` or `WinRTDotNET` )|
 | **/buildTarget** BuildTarget   |Enum string(`StandaloneWindows64`, `iOS`, `Android`, etc...) | 
 | **/buildPath** FilePath    | String path. Default is `bin/UnitTest/{BuildTarget}_{ScriptBackend}/test`(If windows, `test.exe`) |
+
+You can pass by `/` prefix.
 
 License
 ---
