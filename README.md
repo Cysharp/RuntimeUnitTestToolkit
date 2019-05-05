@@ -28,6 +28,10 @@ On CI(use CLI(Headless) mode), if fail the test, shows red. You can notify to Sl
 
 ![image](https://user-images.githubusercontent.com/46207/57200862-d12de180-6fcb-11e9-8353-5a897dd2c952.png)
 
+Install
+---
+`RuntimeUnitTestToolkit.unitypackage` on [releases](https://github.com/Cysharp/RuntimeUnitTestToolkit/releases) page or `package.json` exists on `RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit` for package manager.
+
 CommandLine Reference
 ---
 For example, this library's CI itself.
