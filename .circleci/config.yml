@@ -19,9 +19,9 @@ jobs:
       - run: apt update && apt install libunwind8 -y
       - run:
           name: Build Linux(Mono)
-          command: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend mono /BuildTarget StandaloneLinux64
+          command: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
           working_directory: RuntimeUnitTestToolkit
-      - run: RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64/test
+      - run: RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
       - run:
           name: Export unitypackage
           command: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod PackageExporter.Export

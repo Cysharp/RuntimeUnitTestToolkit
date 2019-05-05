@@ -118,7 +118,7 @@ public static partial class UnitTestBuilder
 
         if (buildPath == null)
         {
-            buildPath = $"bin/UnitTest/{settings.BuildTarget}/test" + (IsWindows(settings.BuildTarget) ? ".exe" : "");
+            buildPath = $"bin/UnitTest/{settings.BuildTarget}_{settings.ScriptBackend}/test" + (IsWindows(settings.BuildTarget) ? ".exe" : "");
         }
 
         var originalScene = SceneManager.GetActiveScene().path;
