@@ -46,7 +46,7 @@ For example, this library's CI itself.
 - run: RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 ```
 
-All of the commnadline arguments.
+You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 
 | Command        | Desc |
 | ---            | ---  |
