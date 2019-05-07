@@ -1,4 +1,4 @@
-RuntimeUnitTestToolkit
+RuntimeUnitTestToolkit(v2)
 ===
 [![CircleCI](https://circleci.com/gh/Cysharp/RuntimeUnitTestToolkit.svg?style=svg)](https://circleci.com/gh/Cysharp/RuntimeUnitTestToolkit)
 
