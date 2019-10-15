@@ -45,6 +45,7 @@ namespace RuntimeUnitTestToolkit
                     else
                     {
                         AppendToGraphicText("[" + c + "]" + a + "\n");
+                        WriteToConsole("[" + c + "]" + a);
                     }
                 };
 
@@ -512,8 +513,7 @@ NEXT_ASSEMBLY:
                         // found match line...
                         var line = string.Join("\n", exception.StackTrace.Split('\n').Where(x => x.Contains(actionList.Key) || x.Contains(item2.Key)).ToArray());
                         AppendToGraphicText("<color=red>" + exception.Message + "\n" + line + "</color>\n");
-                        WriteToConsoleResult(item2.Key + ", " + exception.Message, false);
-                        WriteToConsole(line);
+                        WriteToConsoleResult(item2.Key + ", " + exception.ToString(), false);
                         allGreen = false;
                         allTestGreen = false;
                     }
