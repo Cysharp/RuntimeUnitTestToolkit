@@ -510,9 +510,7 @@ NEXT_ASSEMBLY:
                     }
                     else
                     {
-                        // found match line...
-                        var line = string.Join("\n", exception.StackTrace.Split('\n').Where(x => x.Contains(actionList.Key) || x.Contains(item2.Key)).ToArray());
-                        AppendToGraphicText("<color=red>" + exception.Message + "\n" + line + "</color>\n");
+                        AppendToGraphicText("<color=red>" + exception.ToString() + "</color>\n");
                         WriteToConsoleResult(item2.Key + ", " + exception.ToString(), false);
                         allGreen = false;
                         allTestGreen = false;
