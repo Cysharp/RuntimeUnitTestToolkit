@@ -1,6 +1,6 @@
 RuntimeUnitTestToolkit(v2)
 ===
-[![CircleCI](https://circleci.com/gh/Cysharp/RuntimeUnitTestToolkit.svg?style=svg)](https://circleci.com/gh/Cysharp/RuntimeUnitTestToolkit)
+[![GitHub Actions](https://github.com/Cysharp/RuntimeUnitTestToolkit/workflows/Build-Unity/badge.svg)](https://github.com/Cysharp/RuntimeUnitTestToolkit/actions) [![Releases](https://img.shields.io/github/release/Cysharp/RuntimeUnitTestToolkit.svg)](https://github.com/Cysharp/RuntimeUnitTestToolkit/releases)
 
 RuntimeUnitTestToolkit is the supplement of [Unity Test Runner](https://docs.unity3d.com/Manual/testing-editortestsrunner.html). Unity Test Runner works fine but player runner(any target platform) is very poor. RuntimeUnitTestToolkit provides CLI(for run on CI) and GUI(for run on any platforms(Windows, Mac, iOS, Android, etc...)) frontend of Unity Test Runner.
 
