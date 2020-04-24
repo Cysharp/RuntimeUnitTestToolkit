@@ -116,3 +116,5 @@ RuntimeUnitTestToolkit/Temp/*
 RuntimeUnitTestToolkit/.vs/
 RuntimeUnitTestToolkit/UpgradeLog.htm
 RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.unitypackage
+
+RuntimeUnitTestToolkit/Assembly-CSharp-Editor.csproj

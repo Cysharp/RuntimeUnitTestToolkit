@@ -11,17 +11,24 @@ public static class PackageExporter
     [MenuItem("Tools/Export Unitypackage")]
     public static void Export()
     {
+        var version = Environment.GetEnvironmentVariable("UNITY_PACKAGE_VERSION");
+
         // configure
         var root = "RuntimeUnitTestToolkit";
-        var exportPath = "./RuntimeUnitTestToolkit.unitypackage";
+        var fileName = string.IsNullOrEmpty(version) ? "RuntimeUnitTestToolkit.unitypackage" : $"RuntimeUnitTestToolkit.{version}.unitypackage";
+        var exportPath = "./" + fileName;
+
 
         var path = Path.Combine(Application.dataPath, root);
         var assets = Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories)
-            .Where(x => Path.GetExtension(x) == ".cs" || Path.GetExtension(x) == ".asmdef" || Path.GetExtension(x) == ".json")
+            .Where(x => Path.GetExtension(x) == ".cs" || Path.GetExtension(x) == ".meta" || Path.GetExtension(x) == ".asmdef" || Path.GetExtension(x) == ".json")
             .Select(x => "Assets" + x.Replace(Application.dataPath, "").Replace(@"\", "/"))
             .ToArray();
 
         UnityEngine.Debug.Log("Export below files" + Environment.NewLine + string.Join(Environment.NewLine, assets));
+
+        var dir = new FileInfo(exportPath).Directory;
+        if (!dir.Exists) dir.Create();
 
         AssetDatabase.ExportPackage(
             assets,
