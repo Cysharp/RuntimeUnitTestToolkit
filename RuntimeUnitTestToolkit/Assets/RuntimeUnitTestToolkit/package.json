@@ -1,5 +1,5 @@
 {
-    "name": "jp.cysharp.runtimeunittesttoolkit",
+    "name": "com.cysharp.runtimeunittesttoolkit",
     "displayName": "RuntimeUnitTestToolkit",
     "version": "2.3.0",
     "unity": "2018.3",

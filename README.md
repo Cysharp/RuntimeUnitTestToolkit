@@ -32,18 +32,23 @@ Install
 ---
 `RuntimeUnitTestToolkit.unitypackage` on [releases](https://github.com/Cysharp/RuntimeUnitTestToolkit/releases) page or `package.json` exists on `RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit` for package manager.
 
+After Unity 2019.3.4f1, Unity 2020.1a21, that support path query parameter of git package. You can add `https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit` to Package Manager UI, or add `"com.cysharp.runtimeunittesttoolkit": "https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit"` to `Packages/manifest.json`.
+
+If you want to set a target version, UniTask is using *.*.* release tag so you can specify a version like #2.3.0. For example `https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit#2.3.0`.
+
 CommandLine Reference
 ---
-For example, this library's CI itself.
+For example, this library's CI(GitHub Actions) itself.
 
 ```yml
-# build headless, mono, Linux player
-- run:
-    name: Build Linux(Mono)
-    command: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
-    working_directory: RuntimeUnitTestToolkit
-# execute player on CI
-- run: RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
+# Execute scripts: RuntimeUnitTestToolkit(Linux64/Mono2x)
+- name: Build UnitTest(Linux64, mono)
+  run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
+  working-directory: RuntimeUnitTestToolkit
+
+# Execute player:
+- name: Execute UnitTest
+  run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 ```
 
 You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
@@ -52,8 +57,8 @@ You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 | ---            | ---  |
 | **/headless**      | Boolean switch, build CLI mode. Default is false. |
 | **/scriptBackend** ScriptingImplementation | Enum string(`Mono2x` or `IL2CPP` or `WinRTDotNET` )|
-| **/buildTarget** BuildTarget   |Enum string(`StandaloneWindows64`, `iOS`, `Android`, etc...) | 
-| **/buildPath** FilePath    | String path. Default is `bin/UnitTest/{BuildTarget}_{ScriptBackend}/test`(If windows, `test.exe`) |
+| **/buildTarget** BuildTarget   |Enum string(`StandaloneWindows64`, `StandaloneLinux64`, `StandaloneOSX`, `iOS`, `Android`, etc...) | 
+| **/buildPath** FilePath    | String path. Default is `bin/UnitTest/{BuildTarget}_{ScriptBackend}/test`(If windows `test.exe`, Android `test.apk`, OSX `test.app`) |
 
 You can pass by `/` prefix.
 
