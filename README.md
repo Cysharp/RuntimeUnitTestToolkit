@@ -28,6 +28,10 @@ On CI(use CLI(Headless) mode), if fail the test, shows red. You can notify to Sl
 
 ![image](https://user-images.githubusercontent.com/46207/57200862-d12de180-6fcb-11e9-8353-5a897dd2c952.png)
 
+You can also use GUI test on UnityEditor, choose `LoadUnitTestScene` and play.
+
+![image](https://user-images.githubusercontent.com/46207/80211233-4af12c00-8670-11ea-9c7c-29fb43d3031c.png)
+
 Install
 ---
 `RuntimeUnitTestToolkit.*version*.unitypackage` on [releases](https://github.com/Cysharp/RuntimeUnitTestToolkit/releases) page or `package.json` exists on `RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit` for package manager.
