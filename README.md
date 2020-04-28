@@ -68,6 +68,53 @@ You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 
 You can pass by `/` prefix.
 
+Advanced
+---
+
+### How to get stdout/stderr & ExitCode with StandaloneOSX w/Headless
+
+`/headless` argument offer CUI player, therefore user can handle stdout/stderr and ExitCode on CI.
+
+However you will find it's not for StandaloneOSX. `BuildUnitTest` on StandaloneOSX generate `.app` but you cannot get any output or ExitCode with `open -a xxxx.app` 
+Let's see what going on with this repository's UnitTest.
+
+```shell
+$ cd ./RuntimeUnitTestToolkit
+$ /Applications/Unity/Hub/Editor/2018.3.9f1/Unity.app/Contents/MacOS/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneOSX
+# nothind will output
+$ open -a ./bin/UnitTest/StandaloneOSX_Mono2x/test.app
+# always exitcode is 0, even if test failed.
+$ echo $?
+0
+```
+
+**Trick**
+
+You can obtain stdout/stderr and ExitCode by executing actual binary inside xxxx.app.
+
+> binary path is always `xxxx.app/Contents/MacOS/YOUR_APP_NAME` in StandaloneOSX.
+
+Try open terminal and call binary, then you will find expected output.
+
+```shell
+$ ./bin/UnitTest/StandaloneOSX_Mono2x/test.app/Contents/MacOS/RuntimeUnitTestToolkit
+```
+
+![image](https://user-images.githubusercontent.com/3856350/80474748-cf022700-8982-11ea-8c56-45e9cd0e1bb5.png)
+
+You can Pipe as usual. ExitCode will be `0` when test success, and `1` for failed.
+
+```shell
+$ ./test.app/Contents/MacOS/RuntimeUnitTestToolkit | grep OK
+[OK]SumTest, 14.30ms
+[OK]AsyncTest, 1039.78ms
+```
+
+![image](https://user-images.githubusercontent.com/3856350/80474656-ad08a480-8982-11ea-9e6b-38f9e5539d26.png)
+
+![image](https://user-images.githubusercontent.com/3856350/80474554-8d717c00-8982-11ea-9d7e-aafdf19b0717.png)
+
+
 License
 ---
 This library is under the MIT License.
