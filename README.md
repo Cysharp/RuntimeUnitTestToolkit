@@ -68,6 +68,47 @@ You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 
 You can pass by `/` prefix.
 
+Attribute
+---
+RuntimeUnitTestToolkit supports these attributes.
+
+* SetUp
+* TearDown
+* Test
+* UnityTest
+* TestCase
+* TestCaseSource
+* OneTimeSetUp
+* OneTimeTearDown
+* SetUpFixture
+* UnitySetUp
+* UnityTearDown
+
+Async Test
+---
+Unity's [UnityTest] attribute can test coroutine(IEnumerator) but can not test async. [Cysharp/UniTask](https://github.com/Cysharp/UniTask) and `UniTask.ToCoroutine` bridges async/await to coroutine so you can test async method.
+
+```csharp
+[UnityTest]
+public IEnumerator DelayIgnore() => UniTask.ToCoroutine(async () =>
+{
+    var time = Time.realtimeSinceStartup;
+
+    Time.timeScale = 0.5f;
+    try
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(3), ignoreTimeScale: true);
+
+        var elapsed = Time.realtimeSinceStartup - time;
+        Assert.AreEqual(3, (int)Math.Round(TimeSpan.FromSeconds(elapsed).TotalSeconds, MidpointRounding.ToEven));
+    }
+    finally
+    {
+        Time.timeScale = 1.0f;
+    }
+});
+```
+
 Advanced
 ---
 
