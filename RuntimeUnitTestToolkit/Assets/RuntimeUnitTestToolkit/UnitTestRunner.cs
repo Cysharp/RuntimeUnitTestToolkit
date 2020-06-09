@@ -1,12 +1,9 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.TestTools;
 using UnityEngine.UI;
 
 namespace RuntimeUnitTestToolkit
@@ -51,7 +48,7 @@ namespace RuntimeUnitTestToolkit
                 testData = UnitTestData.CreateFromAllAssemblies();
 
                 var executeAll = new List<Func<Coroutine>>();
-                foreach (var ___item in testData.TestGroups)
+                foreach (var ___item in testData.TestGroups.OrderBy(x => x.Value.Name))
                 {
                     var actionList = ___item; // be careful, capture in lambda
 
@@ -122,60 +119,6 @@ namespace RuntimeUnitTestToolkit
 
             newButton.transform.SetParent(list);
             return newButton;
-        }
-
-        static IEnumerable<Type> GetTestTargetTypes()
-        {
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                var n = assembly.FullName;
-                if (n.StartsWith("UnityEngine")) continue;
-                if (n.StartsWith("mscorlib")) continue;
-                if (n.StartsWith("System")) continue;
-
-                foreach (var item in assembly.GetTypes())
-                {
-                    foreach (var method in item.GetMethods())
-                    {
-                        TestAttribute t1 = null;
-                        try
-                        {
-                            t1 = method.GetCustomAttribute<TestAttribute>(true);
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.Log("TestAttribute Load Fail, Assembly:" + assembly.FullName);
-                            Debug.LogException(ex);
-                            goto NEXT_ASSEMBLY;
-                        }
-                        if (t1 != null)
-                        {
-                            yield return item;
-                            break;
-                        }
-
-                        UnityTestAttribute t2 = null;
-                        try
-                        {
-                            t2 = method.GetCustomAttribute<UnityTestAttribute>(true);
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.Log("UnityTestAttribute Load Fail, Assembly:" + assembly.FullName);
-                            Debug.LogException(ex);
-                            goto NEXT_ASSEMBLY;
-                        }
-                        if (t2 != null)
-                        {
-                            yield return item;
-                            break;
-                        }
-                    }
-                }
-
-                NEXT_ASSEMBLY:
-                continue;
-            }
         }
 
         public void AddCutomAction(string name, UnityAction action)

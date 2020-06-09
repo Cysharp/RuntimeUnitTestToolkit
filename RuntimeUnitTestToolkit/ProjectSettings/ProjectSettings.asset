@@ -620,7 +620,7 @@ PlayerSettings:
   scriptingBackend:
     Android: 0
     Metro: 2
-    Standalone: 0
+    Standalone: 1
     WebGL: 1
     WebPlayer: 0
     iOS: 1
