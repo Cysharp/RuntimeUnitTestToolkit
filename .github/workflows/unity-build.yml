@@ -3,7 +3,7 @@ name: Unity-Build
 on:
   push:
     branches:
-      - "**"
+      - "master"
     tags:
       - "!*" # not a tag push
   pull_request:
