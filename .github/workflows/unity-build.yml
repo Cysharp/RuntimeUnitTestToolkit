@@ -58,4 +58,4 @@ jobs:
           else
             echo "Great, all .meta files are commited."
           fi
-        working-directory: src/Assets
+        working-directory: RuntimeUnitTestToolkit
