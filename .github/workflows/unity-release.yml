@@ -20,7 +20,7 @@ jobs:
   update-packagejson:
     runs-on: ubuntu-latest
     env:
-      TARGET_FILE: ./Assets/RuntimeUnitTestToolkit/package.json
+      TARGET_FILE: ./RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit/package.json
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
     steps:
