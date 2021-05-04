@@ -86,7 +86,7 @@ RuntimeUnitTestToolkit supports these attributes.
 
 Async Test
 ---
-Unity's [UnityTest] attribute can test coroutine(IEnumerator) but can not test async. [Cysharp/UniTask](https://github.com/Cysharp/UniTask) and `UniTask.ToCoroutine` bridges async/await to coroutine so you can test async method.
+Unity's `[UnityTest]`, `[UnitySetup]`, `[UnityTearDown]` attribute can test coroutine(IEnumerator) but can not test async. [Cysharp/UniTask](https://github.com/Cysharp/UniTask) and `UniTask.ToCoroutine` bridges async/await to coroutine so you can test async method.
 
 ```csharp
 [UnityTest]
