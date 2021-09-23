@@ -322,16 +322,12 @@ namespace RuntimeUnitTestToolkit
                 var enumerator = GetTestCaseSource(methodInfo, item.SourceType, item.SourceName, item.MethodParams);
                 foreach (var item2 in enumerator)
                 {
-                    var item3 = item2 as IEnumerable; // object[][]
-                    if (item3 != null)
-                    {
-                        var l = new List<object>();
-                        foreach (var item4 in item3)
-                        {
-                            l.Add(item4);
-                        }
-                        testCases.Add(l.ToArray());
-                    }
+                  var item3 = item2 as TestCaseData;
+                  UnityEngine.Debug.Log(item3);
+                  if (item3 != null)
+                  {
+                      testCases.Add(item3.Arguments);
+                  }
                 }
             }
 
