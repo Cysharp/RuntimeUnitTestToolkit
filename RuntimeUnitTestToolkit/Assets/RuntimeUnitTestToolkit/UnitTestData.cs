@@ -323,7 +323,6 @@ namespace RuntimeUnitTestToolkit
                 foreach (var item2 in enumerator)
                 {
                   var item3 = item2 as TestCaseData;
-                  UnityEngine.Debug.Log(item3);
                   if (item3 != null)
                   {
                       testCases.Add(item3.Arguments);
