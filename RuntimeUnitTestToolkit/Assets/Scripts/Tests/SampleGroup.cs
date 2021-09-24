@@ -1,6 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace SampleUnitTest
@@ -194,6 +196,35 @@ namespace SampleUnitTest
             Debug.Log("Unity Teardown One:" + Time.frameCount);
             yield return null;
             Debug.Log("Unity Teardown Two:" + Time.frameCount);
+        }
+    }
+
+    public class TestCaseSourceGroup
+    {
+        private static readonly TestCaseData[] DivideCases =
+        {
+            new TestCaseData(12, 3, 4),
+            new TestCaseData(12, 2, 6),
+            new TestCaseData(12, 4, 3)
+        };
+        
+
+        [Test, TestCaseSource(nameof(GetTestCases))]
+        public void DivideTest(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+        
+        [UnityTest, TestCaseSource(nameof(GetTestCases))]
+        public IEnumerator DivideUnityTest(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+            yield return null;
+        }
+
+        private static IEnumerable<TestCaseData> GetTestCases()
+        {
+            return DivideCases.Select((t, i) => t.SetName($"{i}").Returns(null));
         }
     }
 }
