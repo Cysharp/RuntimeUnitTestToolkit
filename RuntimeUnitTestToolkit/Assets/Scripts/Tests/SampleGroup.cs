@@ -201,30 +201,31 @@ namespace SampleUnitTest
 
     public class TestCaseSourceGroup
     {
-        private static readonly TestCaseData[] DivideCases =
+        private static readonly object[] ObjectTestCases =
         {
-            new TestCaseData(12, 3, 4),
-            new TestCaseData(12, 2, 6),
-            new TestCaseData(12, 4, 3)
+            new object[] { 12, 3, 4 },
+            new object[] { 12, 2, 6 },
+            new object[] { 12, 4, 3 }
         };
-        
 
-        [Test, TestCaseSource(nameof(GetTestCases))]
+        [Test, TestCaseSource(nameof(ObjectTestCases))]
         public void DivideTest(int n, int d, int q)
         {
             Assert.AreEqual(q, n / d);
         }
         
-        [UnityTest, TestCaseSource(nameof(GetTestCases))]
+        private static readonly TestCaseData[] TestCaseDataCases =
+        {
+            new TestCaseData(12, 3, 4).Returns(null),
+            new TestCaseData(12, 2, 6).Returns(null),
+            new TestCaseData(12, 4, 3).Returns(null)
+        };
+        
+        [UnityTest, TestCaseSource(nameof(TestCaseDataCases))]
         public IEnumerator DivideUnityTest(int n, int d, int q)
         {
             Assert.AreEqual(q, n / d);
             yield return null;
-        }
-
-        private static IEnumerable<TestCaseData> GetTestCases()
-        {
-            return DivideCases.Select((t, i) => t.SetName($"{i}").Returns(null));
         }
     }
 }

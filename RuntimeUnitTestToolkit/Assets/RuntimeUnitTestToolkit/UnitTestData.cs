@@ -322,11 +322,17 @@ namespace RuntimeUnitTestToolkit
                 var enumerator = GetTestCaseSource(methodInfo, item.SourceType, item.SourceName, item.MethodParams);
                 foreach (var item2 in enumerator)
                 {
-                  var item3 = item2 as TestCaseData;
-                  if (item3 != null)
-                  {
-                      testCases.Add(item3.Arguments);
-                  }
+                    if (item2 is TestCaseData item3)
+                    {
+                        testCases.Add(item3.Arguments);
+                    }
+                    else
+                    {
+                        if (item2 is IEnumerable item4)
+                        {
+                            testCases.Add(item4.Cast<object>().ToArray());
+                        }
+                    }
                 }
             }
 
