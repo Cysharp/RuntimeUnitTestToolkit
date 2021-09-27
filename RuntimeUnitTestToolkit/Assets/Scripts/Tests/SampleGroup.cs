@@ -213,14 +213,14 @@ namespace SampleUnitTest
         {
             Assert.AreEqual(q, n / d);
         }
-        
+
         private static readonly TestCaseData[] TestCaseDataCases =
         {
             new TestCaseData(12, 3, 4).Returns(null),
             new TestCaseData(12, 2, 6).Returns(null),
             new TestCaseData(12, 4, 3).Returns(null)
         };
-        
+
         [UnityTest, TestCaseSource(nameof(TestCaseDataCases))]
         public IEnumerator DivideUnityTest(int n, int d, int q)
         {
@@ -228,4 +228,117 @@ namespace SampleUnitTest
             yield return null;
         }
     }
+
+
+
+    public class Group3
+    {
+        // check the compatibility of TestCaseSource and TestCaseData
+        // https://docs.nunit.org/articles/nunit/writing-tests/attributes/testcasesource.html
+        // https://docs.nunit.org/articles/nunit/writing-tests/TestCaseData.html
+
+
+        [Test]
+        [TestCaseSource(nameof(DivideCases))]
+        public void DivideTest(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+
+        static object[] DivideCases =
+        {
+            new object[] { 12, 3, 4 },
+            new object[] { 12, 2, 6 },
+            new object[] { 12, 4, 3 }
+        };
+
+        [Test]
+        [TestCaseSource(nameof(DivideCases2))]
+        public void DivideTest_2(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+
+        static object[][] DivideCases2 =
+        {
+            new object[] { 12, 3, 4 },
+            new object[] { 12, 2, 6 },
+            new object[] { 12, 4, 3 }
+        };
+
+        [Test]
+        [TestCaseSource(typeof(AnotherClass), nameof(AnotherClass.DivideCases))]
+        public void DivideTest2(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+
+
+        public static IEnumerable TestCases
+        {
+            get
+            {
+                yield return new TestCaseData(12, 3).Returns(4);
+                yield return new TestCaseData(12, 2).Returns(6);
+                yield return new TestCaseData(12, 4).Returns(3);
+            }
+        }
+
+
+        [Test]
+        [TestCaseSource(nameof(TestCases))]
+        public int DivideTest5(int n, int d)
+        {
+            return n / d;
+        }
+
+        [Test]
+        [TestCaseSource(typeof(MyDataClass), nameof(MyDataClass.TestCases))]
+        public int DivideTest4(int n, int d)
+        {
+            return n / d;
+        }
+
+        [Test]
+        [TestCaseSource(typeof(DivideCases))]
+        public void DivideTest3(int n, int d, int q)
+        {
+            Assert.AreEqual(q, n / d);
+        }
+    }
+
+    public class AnotherClass
+    {
+        public static object[] DivideCases =
+        {
+            new object[] { 12, 3, 4 },
+            new object[] { 12, 2, 6 },
+            new object[] { 12, 4, 3 }
+        };
+    }
+
+    class DivideCases : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { 12, 3, 4 };
+            yield return new object[] { 12, 2, 6 };
+            yield return new object[] { 12, 4, 3 };
+        }
+    }
+
+    public class MyDataClass
+    {
+        public static IEnumerable TestCases
+        {
+            get
+            {
+                yield return new TestCaseData(12, 3).Returns(4);
+                yield return new TestCaseData(12, 2).Returns(6);
+                yield return new TestCaseData(12, 4).Returns(3);
+            }
+        }
+    }
+
+
 }

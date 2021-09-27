@@ -89,7 +89,7 @@ namespace RuntimeUnitTestToolkit
                     }
                 }
 
-                NEXT_ASSEMBLY:
+            NEXT_ASSEMBLY:
                 continue;
             }
         }
@@ -343,27 +343,36 @@ namespace RuntimeUnitTestToolkit
         {
             Type type = sourceType ?? method.DeclaringType;
 
-            MemberInfo[] member = type.GetMember(sourceName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
-            if (member.Length == 1)
+            if (sourceName != null)
             {
-                MemberInfo memberInfo = member[0];
-                FieldInfo fieldInfo = memberInfo as FieldInfo;
-                if ((object)fieldInfo != null)
+                MemberInfo[] member = type.GetMember(sourceName, BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+                if (member != null && member.Length == 1)
                 {
-                    return (!fieldInfo.IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null) ? ((IEnumerable)fieldInfo.GetValue(null)) : ReturnErrorAsParameter("You have specified a data source field but also given a set of parameters. Fields cannot take parameters, please revise the 3rd parameter passed to the TestCaseSourceAttribute and either remove it or specify a method."));
-                }
-                PropertyInfo propertyInfo = memberInfo as PropertyInfo;
-                if ((object)propertyInfo != null)
-                {
-                    return (!propertyInfo.GetGetMethod(nonPublic: true).IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null) ? ((IEnumerable)propertyInfo.GetValue(null, null)) : ReturnErrorAsParameter("You have specified a data source property but also given a set of parameters. Properties cannot take parameters, please revise the 3rd parameter passed to the TestCaseSource attribute and either remove it or specify a method."));
-                }
-                MethodInfo methodInfo = memberInfo as MethodInfo;
-                if ((object)methodInfo != null)
-                {
-                    return (!methodInfo.IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null || methodInfo.GetParameters().Length == methodParams.Length) ? ((IEnumerable)methodInfo.Invoke(null, methodParams)) : ReturnErrorAsParameter("You have given the wrong number of arguments to the method in the TestCaseSourceAttribute, please check the number of parameters passed in the object is correct in the 3rd parameter for the TestCaseSourceAttribute and this matches the number of parameters in the target method and try again."));
+                    MemberInfo memberInfo = member[0];
+                    FieldInfo fieldInfo = memberInfo as FieldInfo;
+                    if ((object)fieldInfo != null)
+                    {
+                        return (!fieldInfo.IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null) ? ((IEnumerable)fieldInfo.GetValue(null)) : ReturnErrorAsParameter("You have specified a data source field but also given a set of parameters. Fields cannot take parameters, please revise the 3rd parameter passed to the TestCaseSourceAttribute and either remove it or specify a method."));
+                    }
+                    PropertyInfo propertyInfo = memberInfo as PropertyInfo;
+                    if ((object)propertyInfo != null)
+                    {
+                        return (!propertyInfo.GetGetMethod(nonPublic: true).IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null) ? ((IEnumerable)propertyInfo.GetValue(null, null)) : ReturnErrorAsParameter("You have specified a data source property but also given a set of parameters. Properties cannot take parameters, please revise the 3rd parameter passed to the TestCaseSource attribute and either remove it or specify a method."));
+                    }
+                    MethodInfo methodInfo = memberInfo as MethodInfo;
+                    if ((object)methodInfo != null)
+                    {
+                        return (!methodInfo.IsStatic) ? ReturnErrorAsParameter("The sourceName specified on a TestCaseSourceAttribute must refer to a static field, property or method.") : ((methodParams == null || methodInfo.GetParameters().Length == methodParams.Length) ? ((IEnumerable)methodInfo.Invoke(null, methodParams)) : ReturnErrorAsParameter("You have given the wrong number of arguments to the method in the TestCaseSourceAttribute, please check the number of parameters passed in the object is correct in the 3rd parameter for the TestCaseSourceAttribute and this matches the number of parameters in the target method and try again."));
+                    }
                 }
             }
-            return null;
+            else
+            {
+                // only provides sourceType, iterate sourceType itself.
+                return (IEnumerable)Activator.CreateInstance(sourceType);
+            }
+
+            return ReturnErrorAsParameter("Can not recognize as TestCaseSource." + $" {sourceType.FullName}.{method.Name} {sourceName}");
         }
 
         MethodInfo InferGenericType(MethodInfo methodInfo, object[] parameters)
