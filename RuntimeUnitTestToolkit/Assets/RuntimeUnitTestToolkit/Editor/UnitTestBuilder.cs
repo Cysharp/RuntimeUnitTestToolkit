@@ -395,10 +395,12 @@ public static partial class UnitTestBuilder
         {
             options |= BuildOptions.AutoRunPlayer;
         }
+#if !UNITY_2021_2_OR_NEWER
         if (settings.Headless)
         {
             options |= BuildOptions.EnableHeadlessMode;
         }
+#endif
 
         var targetGroup = ToBuildTargetGroup(settings.BuildTarget);
         var currentBackend = PlayerSettings.GetScriptingBackend(targetGroup);
@@ -416,6 +418,13 @@ public static partial class UnitTestBuilder
             scenes = new[] { sceneName },
             locationPathName = buildPath
         };
+
+#if UNITY_2021_2_OR_NEWER
+        if (settings.Headless)
+        {
+            buildOptions.subtarget = (int)StandaloneBuildSubtarget.Server;
+        }
+#endif
 
         UnityEngine.Debug.Log("UnitTest Build Start, " + settings.ToString());
 
