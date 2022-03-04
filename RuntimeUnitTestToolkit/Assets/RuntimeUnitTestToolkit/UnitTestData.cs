@@ -34,6 +34,11 @@ namespace RuntimeUnitTestToolkit
 
                 foreach (var item in assembly.GetTypes())
                 {
+                    if (item.IsAbstract)
+                    {
+                        continue;
+                    }
+
                     SetUpFixtureAttribute setupFixture;
                     try
                     {
