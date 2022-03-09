@@ -68,6 +68,15 @@ You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 
 You can pass by `/` prefix.
 
+In Unity 2021.2 or newer
+---
+"Dedicated Server Build Support" module of the target platform (Linux, Mac or Windows) is required if you use `/headless` option.
+
+![image](https://user-images.githubusercontent.com/19503967/157463636-b554727c-8a92-4e8e-9ca1-ae79fb5e731a.jpg)
+
+[BuildOptions.EnableHeadlessMode](https://docs.unity3d.com/2021.2/Documentation/ScriptReference/BuildOptions.EnableHeadlessMode.html) has been obsoleted in Unity 2021.2, 
+So `StandaloneBuildSubtarget.Server` is used instead.
+
 Attribute
 ---
 RuntimeUnitTestToolkit supports these attributes.
