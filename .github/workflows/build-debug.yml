@@ -1,4 +1,4 @@
-name: Unity-Build
+name: Build-Debug
 
 on:
   push:

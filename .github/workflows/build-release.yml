@@ -1,4 +1,4 @@
-name: Unity-Release
+name: Build-Release
 
 on:
   workflow_dispatch:
