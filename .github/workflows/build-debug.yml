@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - "master"
-    tags:
-      - "!*" # not a tag push
   pull_request:
     branches:
       - "master"
@@ -26,11 +24,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # Execute scripts: RuntimeUnitTestToolkit(Linux64/Mono2x)
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
       - name: Build UnitTest(Linux64, mono)
-        uses: game-ci/unity-builder@v2.0-alpha-6
+        uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets[matrix.license] }}
         with:
@@ -46,7 +44,7 @@ jobs:
       # Execute scripts: Export Package
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod PackageExporter.Export
       - name: Export unitypackage
-        uses: game-ci/unity-builder@v2.0-alpha-6
+        uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets[matrix.license] }}
         with:
@@ -56,12 +54,6 @@ jobs:
           buildMethod: PackageExporter.Export
           versioning: None
 
-      - name: check all .meta is commited
-        run: |
-          if git ls-files --others --exclude-standard -t | grep --regexp='[.]meta$'; then
-            echo "Detected .meta file generated. Do you forgot commit a .meta file?"
-            exit 1
-          else
-            echo "Great, all .meta files are commited."
-          fi
-        working-directory: RuntimeUnitTestToolkit
+      - uses: Cysharp/Actions/.github/actions/check-metas@main # check meta files
+        with:
+          directory: RuntimeUnitTestToolkit
