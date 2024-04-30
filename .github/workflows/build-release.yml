@@ -67,6 +67,7 @@ jobs:
         with:
           name: RuntimeUnitTestToolkit.${{ inputs.tag }}.unitypackage
           path: ./RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.${{ inputs.tag }}.unitypackage
+          retention-days: 1
 
   # release
   create-release:
