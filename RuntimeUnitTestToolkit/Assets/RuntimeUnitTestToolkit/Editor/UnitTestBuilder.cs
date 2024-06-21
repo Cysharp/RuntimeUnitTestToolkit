@@ -21,6 +21,7 @@ internal class RuntimeUnitTestSettings
     public bool Headless;
     public bool AutoRunPlayer;
     public bool DisableAutoClose;
+    public bool BuildScriptsOnly;
 
     public RuntimeUnitTestSettings()
     {
@@ -29,11 +30,12 @@ internal class RuntimeUnitTestSettings
         Headless = false;
         AutoRunPlayer = true;
         DisableAutoClose = false;
+        BuildScriptsOnly = false;
     }
 
     public override string ToString()
     {
-        return $"{ScriptBackend} {BuildTarget} Headless:{Headless} AutoRunPlayer:{AutoRunPlayer} DisableAutoClose:{DisableAutoClose}";
+        return $"{ScriptBackend} {BuildTarget} Headless:{Headless} AutoRunPlayer:{AutoRunPlayer} DisableAutoClose:{DisableAutoClose} BuildScriptsonly:{BuildScriptsOnly}";
     }
 }
 
@@ -390,10 +392,14 @@ public static partial class UnitTestBuilder
 
     static void Build(string sceneName, string buildPath, RuntimeUnitTestSettings settings)
     {
-        var options = BuildOptions.BuildScriptsOnly | BuildOptions.IncludeTestAssemblies;
+        var options = BuildOptions.IncludeTestAssemblies;
         if (settings.AutoRunPlayer)
         {
             options |= BuildOptions.AutoRunPlayer;
+        }
+        if (settings.BuildScriptsOnly)
+        {
+            options |= BuildOptions.BuildScriptsOnly;
         }
 #if !UNITY_2021_2_OR_NEWER
         if (settings.Headless)

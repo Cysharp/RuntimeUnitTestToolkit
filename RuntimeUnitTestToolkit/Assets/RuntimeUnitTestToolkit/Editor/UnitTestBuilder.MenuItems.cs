@@ -82,6 +82,21 @@ public static partial class UnitTestBuilder
         SaveSettings(settings);
     }
 
+    [MenuItem("Test/Settings/BuildScriptsOnly", validate = true, priority = 6)]
+    static bool ValidateBuildScriptsOnly()
+    {
+        Menu.SetChecked("Test/Settings/BuildScriptsOnly", LoadOrGetDefaultSettings().BuildScriptsOnly);
+        return true;
+    }
+
+    [MenuItem("Test/Settings/BuildScriptsOnly", validate = false, priority = 6)]
+    static void BuildScriptsOnly()
+    {
+        var settings = LoadOrGetDefaultSettings();
+        settings.BuildScriptsOnly = !settings.BuildScriptsOnly;
+        SaveSettings(settings);
+    }
+
     // generated
 
     /*
