@@ -2,7 +2,7 @@
     "name": "com.cysharp.runtimeunittesttoolkit",
     "displayName": "RuntimeUnitTestToolkit",
     "author": { "name": "Cysharp, Inc.", "url": "https://cysharp.co.jp/en/" },
-    "version": "2.5.4",
+    "version": "2.6.0",
     "unity": "2018.3",
     "description": "CLI/GUI Frontend of Unity Test Runner to test on any platform.",
     "keywords": ["test"],
