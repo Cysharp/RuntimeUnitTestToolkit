@@ -40,7 +40,7 @@ After Unity 2019.3.4f1, Unity 2020.1a21, that support path query parameter of gi
 
 Or add `"com.cysharp.runtimeunittesttoolkit": "https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit"` to `Packages/manifest.json`.
 
-If you want to set a target version, RuntimeUnitTestToolkit is using `*.*.*` release tag so you can specify a version like `#2.5.4`. For example `https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit#2.5.4`.
+If you want to set a target version, RuntimeUnitTestToolkit is using `*.*.*` release tag so you can specify a version like `#2.6.0`. For example `https://github.com/Cysharp/RuntimeUnitTestToolkit.git?path=RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit#2.6.0`.
 
 CommandLine Reference
 ---
