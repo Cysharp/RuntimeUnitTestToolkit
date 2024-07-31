@@ -69,7 +69,7 @@ jobs:
         run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 
       - name: Remove Library
-        run: rm -rf ./RuntimeUnitTestToolkit/Library
+        run: sudo rm -rf ./RuntimeUnitTestToolkit/Library
 
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend IL2CPP /BuildTarget StandaloneLinux64
       - name: Build UnitTest
