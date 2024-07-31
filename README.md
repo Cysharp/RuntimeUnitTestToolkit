@@ -57,13 +57,24 @@ For example, this library's CI(GitHub Actions) itself.
   run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 ```
 
+```yml
+# Execute scripts: RuntimeUnitTestToolkit(Linux64/IL2CPP)
+- name: Build UnitTest(Linux64, il2cpp)
+  run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend IL2CPP /BuildTarget StandaloneLinux64
+  working-directory: RuntimeUnitTestToolkit
+
+# Execute player:
+- name: Execute UnitTest
+  run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_IL2CPP/test
+```
+
 You can invoke `-executeMethod UnitTestBuilder.BuildUnitTest` and some options.
 
 | Command        | Desc |
 | ---            | ---  |
 | **/headless**      | Boolean switch, build CLI mode. Default is false. |
 | **/scriptBackend** ScriptingImplementation | Enum string(`Mono2x` or `IL2CPP` or `WinRTDotNET` )|
-| **/buildTarget** BuildTarget   |Enum string(`StandaloneWindows64`, `StandaloneLinux64`, `StandaloneOSX`, `iOS`, `Android`, etc...) | 
+| **/buildTarget** BuildTarget   |Enum string(`StandaloneWindows64`, `StandaloneLinux64`, `StandaloneOSX`, `iOS`, `Android`, etc...) |
 | **/buildPath** FilePath    | String path. Default is `bin/UnitTest/{BuildTarget}_{ScriptBackend}/test`(If windows `test.exe`, Android `test.apk`, OSX `test.app`) |
 
 You can pass by `/` prefix.
@@ -116,7 +127,7 @@ Advanced
 
 `/headless` argument offer CUI player, therefore user can handle stdout/stderr and ExitCode on CI.
 
-However you will find it's not for StandaloneOSX. `BuildUnitTest` on StandaloneOSX generate `.app` but you cannot get any output or ExitCode with `open -a xxxx.app` 
+However you will find it's not for StandaloneOSX. `BuildUnitTest` on StandaloneOSX generate `.app` but you cannot get any output or ExitCode with `open -a xxxx.app`
 Let's see what going on with this repository's UnitTest.
 
 ```shell
