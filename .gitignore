@@ -58,7 +58,7 @@ _ReSharper*
 *.ncrunch*
 .*crunch*.local.xml
 
-# Installshield output folder 
+# Installshield output folder
 [Ee]xpress
 
 # DocProject is a documentation generator add-in
@@ -105,22 +105,15 @@ Generated_Code #added for RIA/Silverlight projects
 _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
-.vs/config/applicationhost.config
-.vs/restore.dg
+.vs
 
 # Unity
-RuntimeUnitTestToolkit/bin/*
+.vsconfig
 RuntimeUnitTestToolkit/Library/*
-RuntimeUnitTestToolkit/obj/*
 RuntimeUnitTestToolkit/Temp/*
-RuntimeUnitTestToolkit/.vs/
-RuntimeUnitTestToolkit/UpgradeLog.htm
-RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.unitypackage
-
-RuntimeUnitTestToolkit/Assembly-CSharp-Editor.csproj
-
-RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.csproj
-
-RuntimeUnitTestToolkit/RuntimeUnitTestToolkit.sln
-
-RuntimeUnitTestToolkit/Tests.csproj
+RuntimeUnitTestToolkit/Logs/*
+RuntimeUnitTestToolkit/[Uu]ser[Ss]ettings/
+RuntimeUnitTestToolkit/*.sln
+RuntimeUnitTestToolkit/*.csproj
+RuntimeUnitTestToolkit/*.unitypackage
+!RuntimeUnitTestToolkit/Packages/
