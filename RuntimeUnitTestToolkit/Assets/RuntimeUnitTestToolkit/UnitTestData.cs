@@ -60,8 +60,9 @@ namespace RuntimeUnitTestToolkit
                     {
                         // Skip Test if PerformanceAttribute exists.
                         var attributes = method.GetCustomAttributes();
-                        if (attributes.Any(x => x.GetType().FullName == "Unity.PerformanceTesting.PerformanceAttribute"))
+                        if (attributes.Any(x => string.Equals(x.GetType().FullName, "Unity.PerformanceTesting.PerformanceAttribute", StringComparison.OrdinalIgnoreCase)))
                         {
+                            Debug.Log("[SKIP]" + method.Name + " has PerformanceAttribute.");
                             continue;
                         }
 
