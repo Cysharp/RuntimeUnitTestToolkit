@@ -4,9 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-#if RUNTIMEUNITTESTTOOLKIT_PERFORMANCETESTING_SUPPORT
-using Unity.PerformanceTesting;
-#endif
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -61,22 +58,12 @@ namespace RuntimeUnitTestToolkit
 
                     foreach (var method in item.GetMethods())
                     {
-#if RUNTIMEUNITTESTTOOLKIT_PERFORMANCETESTING_SUPPORT
                         // Skip Test if PerformanceAttribute exists.
-                        PerformanceAttribute t0 = null;
-                        try
-                        {
-                            t0 = method.GetCustomAttribute<PerformanceAttribute>(true);
-                        }
-                        catch (Exception)
-                        {
-                            // no need
-                        }
-                        if (t0 != null)
+                        var attributes = method.GetCustomAttributes();
+                        if (attributes.Any(x => x.GetType().FullName == "Unity.PerformanceTesting.PerformanceAttribute"))
                         {
                             continue;
                         }
-#endif
 
                         TestAttribute t1 = null;
                         try

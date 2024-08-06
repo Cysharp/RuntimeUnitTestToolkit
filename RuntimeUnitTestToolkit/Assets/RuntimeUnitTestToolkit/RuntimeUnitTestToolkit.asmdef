@@ -1,8 +1,5 @@
 {
     "name": "RuntimeUnitTestToolkit",
-    "references": [
-        "Unity.PerformanceTesting"
-    ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
@@ -13,12 +10,5 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.unity.test-framework.performance",
-            "expression": "",
-            "define": "RUNTIMEUNITTESTTOOLKIT_PERFORMANCETESTING_SUPPORT"
-        }
-    ],
     "noEngineReferences": false
 }
