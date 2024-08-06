@@ -13,6 +13,12 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.test-framework.performance",
+            "expression": "",
+            "define": "RUNTIMEUNITTESTTOOLKIT_PERFORMANCETESTING_SUPPORT"
+        }
+    ],
     "noEngineReferences": false
 }
