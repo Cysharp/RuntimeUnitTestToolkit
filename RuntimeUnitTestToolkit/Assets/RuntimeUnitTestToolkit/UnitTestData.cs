@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.PerformanceTesting;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -58,6 +59,21 @@ namespace RuntimeUnitTestToolkit
 
                     foreach (var method in item.GetMethods())
                     {
+                        // Skip Test if PerformanceAttribute exists.
+                        PerformanceAttribute t0 = null;
+                        try
+                        {
+                            t0 = method.GetCustomAttribute<PerformanceAttribute>(true);
+                        }
+                        catch (Exception _)
+                        {
+                            // no need
+                        }
+                        if (t0 != null)
+                        {
+                            continue;
+                        }
+
                         TestAttribute t1 = null;
                         try
                         {

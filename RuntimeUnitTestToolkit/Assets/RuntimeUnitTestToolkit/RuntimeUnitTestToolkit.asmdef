@@ -1,16 +1,22 @@
 {
     "name": "RuntimeUnitTestToolkit",
+    "rootNamespace": "",
     "references": [
-    ],
-    "optionalUnityReferences": [
-        "TestAssemblies"
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Unity.PerformanceTesting"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": []
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
