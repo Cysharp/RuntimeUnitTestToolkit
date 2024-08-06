@@ -65,7 +65,7 @@ namespace RuntimeUnitTestToolkit
                         {
                             t0 = method.GetCustomAttribute<PerformanceAttribute>(true);
                         }
-                        catch (Exception _)
+                        catch (Exception)
                         {
                             // no need
                         }
