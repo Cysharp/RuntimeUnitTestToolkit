@@ -1,7 +1,5 @@
 {
     "name": "RuntimeUnitTestToolkit",
-    "references": [
-    ],
     "optionalUnityReferences": [
         "TestAssemblies"
     ],
@@ -12,5 +10,5 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "noEngineReferences": false
 }
