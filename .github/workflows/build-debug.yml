@@ -35,6 +35,7 @@ jobs:
       # Execute scripts: Export Package
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod PackageExporter.Export
       - name: Build Unity (.unitypacakge)
+        if: ${{ startsWith(matrix.unity, '2021') }} # only execute once
         uses: Cysharp/Actions/.github/actions/unity-builder@main
         env:
           UNITY_EMAIL: ${{ steps.op-load-secret.outputs.UNITY_EMAIL }}
@@ -92,6 +93,7 @@ jobs:
 
       # Store artifacts.
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
+        if: ${{ startsWith(matrix.unity, '2021') }} # only execute once
         with:
           name: RuntimeUnitTestToolkit.${{ matrix.unity }}.unitypackage.zip
           path: ./RuntimeUnitTestToolkit/*.unitypackage
