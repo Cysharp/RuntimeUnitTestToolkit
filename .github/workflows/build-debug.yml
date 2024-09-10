@@ -13,6 +13,7 @@ jobs:
     if: ${{ ((github.event_name == 'push' && github.repository_owner == 'Cysharp') || startsWith(github.event.pull_request.head.label, 'Cysharp:')) && github.triggering_actor != 'dependabot[bot]' }}
     strategy:
       fail-fast: false
+      max-parallel: 2
       matrix:
         unity: ["2021.3.41f1", "2022.3.39f1", "6000.0.12f1"] # Test with LTS
     runs-on: ubuntu-latest
@@ -34,6 +35,7 @@ jobs:
       # Execute scripts: Export Package
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod PackageExporter.Export
       - name: Build Unity (.unitypacakge)
+        if: ${{ startsWith(matrix.unity, '2021') }} # only execute once
         uses: Cysharp/Actions/.github/actions/unity-builder@main
         env:
           UNITY_EMAIL: ${{ steps.op-load-secret.outputs.UNITY_EMAIL }}
@@ -49,30 +51,31 @@ jobs:
         with:
           directory: RuntimeUnitTestToolkit
 
-      # Execute Unittest
-      # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
-      - name: Build UnitTest
-        uses: Cysharp/Actions/.github/actions/unity-builder@main
-        env:
-          UNITY_EMAIL: ${{ steps.op-load-secret.outputs.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ steps.op-load-secret.outputs.UNITY_PASSWORD }}
-          UNITY_SERIAL: ${{ steps.op-load-secret.outputs.UNITY_SERIAL }}
-        with:
-          projectPath: RuntimeUnitTestToolkit
-          unityVersion: ${{ matrix.unity }}
-          targetPlatform: StandaloneLinux64
-          buildMethod: UnitTestBuilder.BuildUnitTest
-          customParameters: "/headless /ScriptBackend Mono2x"
-      - name: Check UnitTest file is generated
-        run: ls -lR ./RuntimeUnitTestToolkit/bin/UnitTest
-      - name: Execute UnitTest
-        run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
+      # Execute Unittest Mono2x (4m 30s)
+      # # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend Mono2x /BuildTarget StandaloneLinux64
+    #   - name: Build UnitTest (Mono2x)
+    #     uses: Cysharp/Actions/.github/actions/unity-builder@main
+    #     env:
+    #       UNITY_EMAIL: ${{ steps.op-load-secret.outputs.UNITY_EMAIL }}
+    #       UNITY_PASSWORD: ${{ steps.op-load-secret.outputs.UNITY_PASSWORD }}
+    #       UNITY_SERIAL: ${{ steps.op-load-secret.outputs.UNITY_SERIAL }}
+    #     with:
+    #       projectPath: RuntimeUnitTestToolkit
+    #       unityVersion: ${{ matrix.unity }}
+    #       targetPlatform: StandaloneLinux64
+    #       buildMethod: UnitTestBuilder.BuildUnitTest
+    #       customParameters: "/headless /ScriptBackend Mono2x"
+    #   - name: Check UnitTest file is generated
+    #     run: ls -lR ./RuntimeUnitTestToolkit/bin/UnitTest
+    #   - name: Execute UnitTest
+    #     run: ./RuntimeUnitTestToolkit/bin/UnitTest/StandaloneLinux64_Mono2x/test
 
-      - name: Remove Library
-        run: sudo rm -rf ./RuntimeUnitTestToolkit/Library
+    #   - name: Remove Library
+    #     run: sudo rm -rf ./RuntimeUnitTestToolkit/Library
 
+      # Execute Unittest IL2CPP (4m 30s)
       # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod UnitTestBuilder.BuildUnitTest /headless /ScriptBackend IL2CPP /BuildTarget StandaloneLinux64
-      - name: Build UnitTest
+      - name: Build UnitTest (IL2CPP)
         uses: Cysharp/Actions/.github/actions/unity-builder@main
         env:
           UNITY_EMAIL: ${{ steps.op-load-secret.outputs.UNITY_EMAIL }}
@@ -91,6 +94,7 @@ jobs:
 
       # Store artifacts.
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
+        if: ${{ startsWith(matrix.unity, '2021') }} # only execute once
         with:
           name: RuntimeUnitTestToolkit.${{ matrix.unity }}.unitypackage.zip
           path: ./RuntimeUnitTestToolkit/*.unitypackage
