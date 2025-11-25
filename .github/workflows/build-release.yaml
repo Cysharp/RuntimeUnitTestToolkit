@@ -22,7 +22,6 @@ jobs:
       file-path: ./RuntimeUnitTestToolkit/Assets/RuntimeUnitTestToolkit/package.json
       tag: ${{ inputs.tag }}
       dry-run: ${{ inputs.dry-run }}
-      push-tag: false
 
   build-unity:
     needs: [update-packagejson]
