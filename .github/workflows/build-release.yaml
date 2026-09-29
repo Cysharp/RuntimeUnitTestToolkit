@@ -86,7 +86,7 @@ jobs:
       tag: ${{ inputs.tag }}
       nuget-push: false
       release-upload: true
-      release-asset-path: ./RuntimeUnitTestToolkit.${{ inputs.tag }}.unitypackage/RuntimeUnitTestToolkit.${{ inputs.tag }}.unitypackage
+      release-asset-path: ./RuntimeUnitTestToolkit.${{ inputs.tag }}.unitypackage
     secrets: inherit
 
   cleanup:
