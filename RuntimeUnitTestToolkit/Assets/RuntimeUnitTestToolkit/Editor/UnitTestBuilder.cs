@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 
 using RuntimeUnitTestToolkit;
 using RuntimeUnitTestToolkit.Editor;
@@ -450,7 +450,8 @@ public static partial class UnitTestBuilder
         }
         else
         {
-            UnityEngine.Debug.Log("UnitTest Build Completed, binary located: " + buildOptions.locationPathName);
+            // HACK: game-ci/Unity-builder@v6 require `Build succeeded!` message to detect successful build.
+            UnityEngine.Debug.Log("Build succeeded! UnitTest Build Completed, binary located: " + buildOptions.locationPathName);
         }
     }
 
@@ -480,7 +481,7 @@ public static partial class UnitTestBuilder
             case BuildTarget.StandaloneWindows64:
             case BuildTarget.WSAPlayer:
                 return ".exe";
-            case BuildTarget.StandaloneOSX:                
+            case BuildTarget.StandaloneOSX:
                 return ".app";
             case BuildTarget.Android:
                 return ".apk";
